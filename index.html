@@ -73,6 +73,7 @@
             --background: #f5f7fb;
             --border-radius: 16px;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --top-bar-height: 40px;
         }
 
         body {
@@ -82,16 +83,233 @@
             line-height: 1.5;
         }
 
+        body.top-bar-hidden {
+            --top-bar-height: 0px;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 16px;
         }
 
-        /* Фиксированный хедер */
-        .fixed-header {
+        /* === Светлый баннер === */
+        .top-bar {
             position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--top-bar-height);
+            background: #ffffff;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            border-bottom: 1px solid #e5e7eb;
+            transition: height 0.3s ease;
+        }
+
+        .top-bar.hidden {
+            display: none;
+        }
+
+        .top-bar-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Основной контент (виден по умолчанию) */
+        .top-bar-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 0;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .top-bar-left img {
+            height: 24px;
+            max-width: 80px;
+            object-fit: contain;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .top-bar-text {
+            font-size: 13px;
+            font-weight: 500;
+            color: #1f2937;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .top-bar-text .highlight {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .top-bar-label {
+            font-size: 10px;
+            color: #9ca3af;
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+
+        .top-bar-dots {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 2px 6px;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .top-bar-dots:hover {
+            color: #1f2937;
+        }
+
+        /* Модальное окно (поверх баннера) – стили как в вашем файле */
+        .top-bar-modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0;
+            z-index: 2;
+            border-radius: 0;
+        }
+
+        .top-bar.modal-open .top-bar-main {
+            display: none;
+        }
+
+        .top-bar.modal-open .top-bar-modal {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .top-bar-modal-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+            min-width: 0;
+            gap: 1px;
+            text-align: left;
+        }
+
+        .modal-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px 10px;
+            font-size: 10px;
+            color: #1f2937;
+            text-align: left;
+            width: 100%;
+        }
+
+        .modal-links span {
+            cursor: pointer;
+            white-space: nowrap;
+            transition: color 0.2s;
+        }
+
+        .modal-links span:hover {
+            color: var(--primary);
+        }
+
+        /* Стили для ссылок в модалке – убираем подчёркивание */
+        .modal-links a {
+            text-decoration: none;
+            color: #1f2937;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+
+        .modal-links a:hover {
+            color: var(--primary);
+        }
+
+        .modal-links .modal-label {
+            color: #6b7280;
+            cursor: default;
+            font-weight: 500;
+        }
+
+        .modal-links .modal-label:hover {
+            color: #6b7280;
+        }
+
+        .modal-footer {
+            font-size: 9px;
+            color: #6b7280;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: left;
+            width: 100%;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 2px 6px;
+            line-height: 1;
+            transition: color 0.2s;
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+
+        .modal-close:hover {
+            color: #1f2937;
+        }
+
+        /* === Фиксированный хедер (сдвинут вниз) === */
+        .fixed-header {
+            position: fixed;
+            top: var(--top-bar-height);
             left: 0;
             width: 100%;
             background: var(--white);
@@ -102,6 +320,7 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: nowrap;
+            transition: top 0.3s ease;
         }
 
         .header-logo {
@@ -120,8 +339,8 @@
         }
 
         .header-logo a {
-            text-decoration: none;      /* убирает подчёркивание */
-            color: inherit;             /* заставляет ссылку наследовать цвет от родительского элемента */
+            text-decoration: none;
+            color: inherit;
         }        
 
         .header-btn {
@@ -142,7 +361,7 @@
             background: var(--secondary);
         }
 
-        /* Hero Section */
+        /* Hero Section (отступ сверху с учётом хедера и баннера) */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             padding: 0 0 60px;
@@ -168,7 +387,8 @@
             align-items: center;
             position: relative;
             z-index: 2;
-            padding-top: 100px;
+            padding-top: calc(100px + var(--top-bar-height));
+            transition: padding-top 0.3s ease;
         }
 
         .hero-text h1 {
@@ -232,7 +452,7 @@
         }
 
         .phone-mockup:hover {
-            transform: none; /* При наведении на десктопе выравнивание */
+            transform: none;
         }
 
         .phone-screen {
@@ -246,7 +466,6 @@
             gap: 12px;
         }
 
-        /* Стили элементов внутри мокапа (как в приложении) */
         .app-header-mock {
             display: flex;
             justify-content: space-between;
@@ -362,7 +581,6 @@
             gap: 6px;
         }
 
-        /* Продающие блоки */
         .section {
             padding: 60px 0 30px;
         }
@@ -537,7 +755,7 @@
             transform: scale(1.05);
         }
 
-        /* Footer */
+        /* Footer – 4 колонки (без баннера) */
         footer {
             background: var(--dark);
             color: white;
@@ -583,10 +801,10 @@
             color: #94a3b8;
             font-size: 22px;
             transition: color 0.2s;
-            display: inline-flex;      /* добавить */
-            align-items: center;       /* добавить */
-            justify-content: center;   /* добавить (необязательно) */
-            text-decoration: none;     /* добавить, если нужно убрать подчёркивание */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
         }
 
         .social a:hover {
@@ -649,7 +867,7 @@
             }
         }
 
-        /* Планшеты (769px – 1024px): две колонки, небольшая коррекция размеров */
+        /* Планшеты */
         @media (min-width: 769px) and (max-width: 1024px) {
             .hero-text h1 {
                 font-size: 2.5rem;
@@ -662,8 +880,42 @@
             }
         }
 
-        /* Мобильные устройства (≤768px): одна колонка, прямой мокап, уменьшенный хедер */
+        /* Мобильные устройства */
         @media (max-width: 768px) {
+            .top-bar {
+                padding: 0 16px;
+                height: 40px;
+            }
+            .top-bar-left img {
+                height: 20px;
+                max-width: 60px;
+            }
+            .top-bar-text {
+                font-size: 10px;
+            }
+            .top-bar-dots {
+                font-size: 16px;
+                padding: 2px 4px;
+            }
+            .top-bar-label {
+                font-size: 9px;
+                padding: 1px 4px;
+            }
+            .top-bar-modal {
+                padding: 0;
+            }
+            .modal-links {
+                font-size: 9px;
+                gap: 2px 6px;
+            }
+            .modal-footer {
+                font-size: 8px;
+            }
+            .modal-close {
+                font-size: 16px;
+                padding: 2px 4px;
+            }
+
             .fixed-header {
                 padding: 8px 16px;
             }
@@ -682,7 +934,7 @@
             .hero-content {
                 grid-template-columns: 1fr;
                 text-align: center;
-                padding-top: 70px;
+                padding-top: calc(70px + var(--top-bar-height));
             }
             .hero-text h1 {
                 font-size: 2rem;
@@ -693,10 +945,10 @@
             .phone-mockup {
                 max-width: 360px;
                 margin: 0 auto;
-                transform: none; /* Убираем наклон */
+                transform: none;
             }
             .phone-mockup:hover {
-                transform: scale(1.05); /* Только масштаб при наведении */
+                transform: scale(1.05);
             }
             .phone-screen {
                 height: 520px;
@@ -715,13 +967,11 @@
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
-            /* Вертикальное расположение карточек в блоке "Для кого" */
             .features-grid[style*="repeat(3,1fr)"] {
                 grid-template-columns: 1fr !important;
             }
         }
 
-        /* Утилиты */
         .fade-in {
             animation: fadeIn 1s ease-in-out;
         }
@@ -733,8 +983,44 @@
     </style>
 </head>
 <body>
+
+    <!-- === Светлый баннер === -->
+    <div class="top-bar" id="topBar">
+        <div class="top-bar-content">
+            <!-- Основной контент (виден по умолчанию) -->
+            <div class="top-bar-main">
+                <a href="https://redirect.appmetrica.yandex.com/serve/246095005385529556?partner_id=831050&appmetrica_js_redirect=0&clid=15177770&banerid=1315177771&full=0" target="_blank" rel="noopener noreferrer" class="top-bar-left">
+                    <img src="300x250.png" alt="Яндекс Браузер">
+                    <span class="top-bar-text">
+                        <span class="highlight">Яндекс Браузер</span> с Алисой — быстро, безопасно, удобно
+                    </span>
+                </a>
+                <div class="top-bar-right">
+                    <span class="top-bar-label">Реклама</span>
+                    <button class="top-bar-dots" id="dotsMenuBtn" aria-label="Меню рекламы">⋮</button>
+                </div>
+            </div>
+
+            <!-- Модальное окно (поверх баннера) -->
+            <div class="top-bar-modal" id="modalMenu">
+                <div class="top-bar-modal-content">
+                    <div class="modal-links">
+                        <span class="modal-label">Реклама</span>
+                        <span id="hideAdBtn">Скрыть</span>
+                        <a href="https://yandex.ru/company/contacts/moscow" target="_blank">О рекламодателе</a>
+                        <a href="https://yandex.ru/support/browser-b2c-distr/ru/" target="_blank">О рекламе</a>
+                    </div>
+                    <div class="modal-footer">
+                        ООО «Яндекс», ИНН: 7736207543, erid: 5jtCeReNx12oajzf1gm8YtP
+                    </div>
+                </div>
+                <button class="modal-close" id="modalCloseBtn" aria-label="Закрыть меню">&times;</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Фиксированный хедер -->
-    <header class="fixed-header">
+    <header class="fixed-header" id="fixedHeader">
         <div class="header-logo">
             <a href="index.html">
                 <i class="fas fa-chart-line"></i>
@@ -745,9 +1031,9 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="heroSection">
         <div class="container">
-            <div class="hero-content">
+            <div class="hero-content" id="heroContent">
                 <div class="hero-text fade-in">
                     <h1>Умный кэшбэк и анализ расходов</h1>
                     <p>Получайте максимум выгоды с каждой покупки, используя рекомендации приложения</p>
@@ -759,7 +1045,6 @@
                 <div class="hero-image fade-in">
                     <div class="phone-mockup">
                         <div class="phone-screen">
-                            <!-- Шапка приложения (внутри мокапа) -->
                             <div class="app-header-mock">
                                 <div class="app-logo-mock">
                                     <i class="fas fa-chart-line"></i>
@@ -770,8 +1055,6 @@
                                     <i class="far fa-user"></i>
                                 </div>
                             </div>
-
-                            <!-- Карточка баланса -->
                             <div class="card-mock balance-card-mock">
                                 <div class="balance-header-mock">
                                     <span>Ваш кэшбэк за месяц</span>
@@ -784,8 +1067,6 @@
                                     <span>Лучшая категория: Супермаркеты (1720 ₽)</span>
                                 </div>
                             </div>
-
-                            <!-- Поиск лучшей карты -->
                             <div class="card-mock">
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
                                     <span style="font-weight: 600;">Поиск лучшей карты</span>
@@ -800,8 +1081,6 @@
                                     <button class="btn-primary-mock">Найти лучшую карту</button>
                                 </div>
                             </div>
-
-                            <!-- Рекомендация на сегодня -->
                             <div class="recommendation-mock">
                                 <div class="recommendation-title-mock">
                                     <i class="fas fa-lightbulb" style="color: var(--success);"></i>
@@ -994,13 +1273,46 @@
     </footer>
 
     <script>
-        // Simple scroll animation
         document.addEventListener('DOMContentLoaded', function() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+            // --- Управление модальным окном ---
+            const topBar = document.getElementById('topBar');
+            const dotsBtn = document.getElementById('dotsMenuBtn');
+            const modalClose = document.getElementById('modalCloseBtn');
+            const hideAdBtn = document.getElementById('hideAdBtn');
+            const fixedHeader = document.getElementById('fixedHeader');
+            const heroContent = document.getElementById('heroContent');
 
+            // Открыть модалку
+            dotsBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                topBar.classList.toggle('modal-open');
+            });
+
+            // Закрыть модалку по крестику
+            modalClose.addEventListener('click', function() {
+                topBar.classList.remove('modal-open');
+            });
+
+            // Обработка пункта "Скрыть" – закрыть баннер полностью
+            hideAdBtn.addEventListener('click', function() {
+                topBar.classList.add('hidden');
+                document.body.classList.add('top-bar-hidden');
+                fixedHeader.style.top = '0px';
+                heroContent.style.paddingTop = '100px';
+                localStorage.setItem('topBarClosed', 'true');
+                topBar.classList.remove('modal-open');
+            });
+
+            // Проверка localStorage при загрузке
+            if (localStorage.getItem('topBarClosed') === 'true') {
+                topBar.classList.add('hidden');
+                document.body.classList.add('top-bar-hidden');
+                fixedHeader.style.top = '0px';
+                heroContent.style.paddingTop = '100px';
+            }
+
+            // --- Остальные скрипты (анимации, скролл) ---
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
             const observer = new IntersectionObserver(function(entries) {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1008,29 +1320,20 @@
                     }
                 });
             }, observerOptions);
-
-            // Observe all sections
             document.querySelectorAll('section').forEach(section => {
                 observer.observe(section);
             });
-
-            // Smooth scroll for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     const target = document.querySelector(this.getAttribute('href'));
                     if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 });
             });
-
-            // Header background on scroll
             window.addEventListener('scroll', function() {
-                const header = document.querySelector('header');
+                const header = document.querySelector('.fixed-header');
                 if (window.scrollY > 100) {
                     header.style.background = 'rgba(255, 255, 255, 0.95)';
                     header.style.backdropFilter = 'blur(10px)';
@@ -1039,20 +1342,6 @@
                     header.style.backdropFilter = 'none';
                 }
             });
-
-            // Search form functionality
-            const searchForm = document.querySelector('.search-form');
-            const searchInput = document.querySelector('.search-input');
-            
-            if (searchForm) {
-                searchForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    if (searchInput.value.trim() !== '') {
-                        alert(`Поиск лучшей карты для категории: ${searchInput.value}`);
-                        searchInput.value = '';
-                    }
-                });
-            }
         });
     </script>    
 
@@ -1065,7 +1354,6 @@
     </div>
 
     <script>
-        // Cookie-баннер
         (function() {
             if (!localStorage.getItem('cookieAccepted')) {
                 document.getElementById('cookie-banner').style.display = 'block';
@@ -1075,8 +1363,6 @@
                 document.getElementById('cookie-banner').style.display = 'none';
             });
         })();
-
-        // Плавный скролл к разделу "Возможности"
         document.querySelector('.btn-secondary').addEventListener('click', function(e) {
             e.preventDefault();
             document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
