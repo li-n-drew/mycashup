@@ -1254,12 +1254,16 @@
             stopRotation();
         });
 
-        // ==================== КЛИК ПО БАННЕРУ ====================
+        // ==================== КЛИК ПО БАННЕРУ С ОТСЛЕЖИВАНИЕМ В ЯНДЕКС.МЕТРИКЕ ====================
         banner.addEventListener('click', function(e) {
+            // Игнорируем клик по кнопке меню и по модальному окну
             if (e.target.closest('.offer-banner-dots') || e.target.closest('.offer-banner-modal')) {
                 return;
             }
             if (currentOffer && currentOffer.link) {
+                // Отправляем событие в Яндекс.Метрику (цель 'offer_click')
+                ym(105593053, 'reachGoal', 'offer_click');
+                // Открываем ссылку в новой вкладке
                 window.open(currentOffer.link, '_blank');
             }
         });
