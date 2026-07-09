@@ -26,34 +26,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    
     <!-- FAVICON -->
-    <!-- Базовый favicon -->
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
-  <link rel="icon" type="image/png" sizes="120x120" href="/images/favicon-120x120.png">
-    
-    <!-- Для современных браузеров -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-    
-    <!-- Apple Touch Icon (для iOS) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-    
-    <!-- Android Chrome -->
-  <link rel="icon" type="image/png" sizes="192x192" href="/images/icon-192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="/images/icon-512.png">
-    
-    <!-- Manifest для PWA -->
-  <link rel="manifest" href="/images/site.webmanifest">
-    
-    <!-- Цвет theme в браузере -->
-  <meta name="theme-color" content="#6366f1">
-    
-    <!-- Остальные стили и скрипты -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="icon" type="image/png" sizes="120x120" href="/images/favicon-120x120.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/images/icon-512.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+    <meta name="theme-color" content="#6366f1">
 
     <style>
+        /* ==================== ОСНОВНЫЕ СТИЛИ ==================== */
         * {
             margin: 0;
             padding: 0;
@@ -73,7 +59,6 @@
             --background: #f5f7fb;
             --border-radius: 16px;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-            --top-bar-height: 40px;
         }
 
         body {
@@ -83,233 +68,16 @@
             line-height: 1.5;
         }
 
-        body.top-bar-hidden {
-            --top-bar-height: 0px;
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 16px;
         }
 
-        /* === Светлый баннер === */
-        .top-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--top-bar-height);
-            background: #ffffff;
-            z-index: 1001;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-            border-bottom: 1px solid #e5e7eb;
-            transition: height 0.3s ease;
-        }
-
-        .top-bar.hidden {
-            display: none;
-        }
-
-        .top-bar-content {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Основной контент (виден по умолчанию) */
-        .top-bar-main {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            height: 100%;
-        }
-
-        .top-bar-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-            min-width: 0;
-            text-decoration: none;
-            color: inherit;
-            cursor: pointer;
-        }
-
-        .top-bar-left img {
-            height: 24px;
-            max-width: 80px;
-            object-fit: contain;
-            border-radius: 4px;
-            flex-shrink: 0;
-        }
-
-        .top-bar-text {
-            font-size: 13px;
-            font-weight: 500;
-            color: #1f2937;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .top-bar-text .highlight {
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .top-bar-right {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
-        }
-
-        .top-bar-label {
-            font-size: 10px;
-            color: #9ca3af;
-            background: #f3f4f6;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            white-space: nowrap;
-        }
-
-        .top-bar-dots {
-            background: none;
-            border: none;
-            font-size: 18px;
-            color: #9ca3af;
-            cursor: pointer;
-            padding: 2px 6px;
-            line-height: 1;
-            transition: color 0.2s;
-        }
-
-        .top-bar-dots:hover {
-            color: #1f2937;
-        }
-
-        /* Модальное окно (поверх баннера) – стили как в вашем файле */
-        .top-bar-modal {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #ffffff;
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0;
-            z-index: 2;
-            border-radius: 0;
-        }
-
-        .top-bar.modal-open .top-bar-main {
-            display: none;
-        }
-
-        .top-bar.modal-open .top-bar-modal {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .top-bar-modal-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex: 1;
-            min-width: 0;
-            gap: 1px;
-            text-align: left;
-        }
-
-        .modal-links {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 4px 10px;
-            font-size: 10px;
-            color: #1f2937;
-            text-align: left;
-            width: 100%;
-        }
-
-        .modal-links span {
-            cursor: pointer;
-            white-space: nowrap;
-            transition: color 0.2s;
-        }
-
-        .modal-links span:hover {
-            color: var(--primary);
-        }
-
-        /* Стили для ссылок в модалке – убираем подчёркивание */
-        .modal-links a {
-            text-decoration: none;
-            color: #1f2937;
-            transition: color 0.2s;
-            white-space: nowrap;
-        }
-
-        .modal-links a:hover {
-            color: var(--primary);
-        }
-
-        .modal-links .modal-label {
-            color: #6b7280;
-            cursor: default;
-            font-weight: 500;
-        }
-
-        .modal-links .modal-label:hover {
-            color: #6b7280;
-        }
-
-        .modal-footer {
-            font-size: 9px;
-            color: #6b7280;
-            line-height: 1.2;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align: left;
-            width: 100%;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 18px;
-            color: #9ca3af;
-            cursor: pointer;
-            padding: 2px 6px;
-            line-height: 1;
-            transition: color 0.2s;
-            flex-shrink: 0;
-            margin-left: 8px;
-        }
-
-        .modal-close:hover {
-            color: #1f2937;
-        }
-
-        /* === Фиксированный хедер (сдвинут вниз) === */
+        /* === Фиксированный хедер (без верхнего баннера, top: 0) === */
         .fixed-header {
             position: fixed;
-            top: var(--top-bar-height);
+            top: 0;
             left: 0;
             width: 100%;
             background: var(--white);
@@ -320,9 +88,8 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: nowrap;
-            transition: top 0.3s ease;
+            transition: background 0.3s, backdrop-filter 0.3s;
         }
-
         .header-logo {
             display: flex;
             align-items: center;
@@ -332,17 +99,14 @@
             font-size: 24px;
             white-space: nowrap;
         }
-
         .header-logo i {
             font-size: 28px;
             color: var(--primary);
         }
-
         .header-logo a {
             text-decoration: none;
             color: inherit;
-        }        
-
+        }
         .header-btn {
             background: var(--primary);
             color: var(--white);
@@ -356,12 +120,11 @@
             display: inline-block;
             flex-shrink: 0;
         }
-
         .header-btn:hover {
             background: var(--secondary);
         }
 
-        /* Hero Section (отступ сверху с учётом хедера и баннера) */
+        /* Hero Section (отступ сверху только под хедер) */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             padding: 0 0 60px;
@@ -369,7 +132,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .hero::before {
             content: '';
             position: absolute;
@@ -379,7 +141,6 @@
             bottom: 0;
             background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-
         .hero-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -387,29 +148,25 @@
             align-items: center;
             position: relative;
             z-index: 2;
-            padding-top: calc(100px + var(--top-bar-height));
+            padding-top: 100px; /* только отступ под хедер */
             transition: padding-top 0.3s ease;
         }
-
         .hero-text h1 {
             font-size: 3rem;
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 1.5rem;
         }
-
         .hero-text p {
             font-size: 1.25rem;
             margin-bottom: 2rem;
             opacity: 0.95;
         }
-
         .hero-buttons {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
         }
-
         .cta-button {
             display: inline-block;
             background: var(--white);
@@ -421,19 +178,16 @@
             transition: all 0.3s;
             border: 2px solid transparent;
         }
-
         .cta-button:hover {
             background: transparent;
             color: var(--white);
             border-color: var(--white);
         }
-
         .btn-secondary {
             background: transparent;
             border: 2px solid var(--white);
             color: var(--white);
         }
-
         .btn-secondary:hover {
             background: var(--white);
             color: var(--primary);
@@ -450,11 +204,9 @@
             max-width: 500px;
             margin-left: auto;
         }
-
         .phone-mockup:hover {
             transform: none;
         }
-
         .phone-screen {
             background: var(--background);
             border-radius: 20px;
@@ -465,14 +217,12 @@
             flex-direction: column;
             gap: 12px;
         }
-
         .app-header-mock {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 4px 0;
         }
-
         .app-logo-mock {
             display: flex;
             align-items: center;
@@ -481,30 +231,25 @@
             font-weight: 700;
             font-size: 20px;
         }
-
         .app-logo-mock i {
             font-size: 22px;
         }
-
         .app-icons-mock {
             display: flex;
             gap: 12px;
             color: var(--gray);
             font-size: 18px;
         }
-
         .card-mock {
             background: var(--white);
             border-radius: var(--border-radius);
             padding: 16px;
             box-shadow: var(--shadow);
         }
-
         .balance-card-mock {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
         }
-
         .balance-header-mock {
             display: flex;
             justify-content: space-between;
@@ -512,13 +257,11 @@
             font-size: 14px;
             opacity: 0.9;
         }
-
         .balance-amount-mock {
             font-size: 28px;
             font-weight: 700;
             margin: 8px 0;
         }
-
         .best-category-mock {
             display: flex;
             align-items: center;
@@ -528,7 +271,6 @@
             border-top: 1px solid rgba(255,255,255,0.2);
             font-size: 13px;
         }
-
         .search-section-mock .form-label {
             font-size: 14px;
             font-weight: 500;
@@ -536,7 +278,6 @@
             display: block;
             color: var(--dark);
         }
-
         .category-select-mock {
             display: flex;
             justify-content: space-between;
@@ -549,11 +290,9 @@
             color: var(--dark);
             margin-bottom: 12px;
         }
-
         .category-select-mock span {
             color: var(--gray);
         }
-
         .btn-primary-mock {
             background: var(--primary);
             color: white;
@@ -565,14 +304,12 @@
             width: 100%;
             cursor: pointer;
         }
-
         .recommendation-mock {
             background: rgba(76, 201, 240, 0.1);
             border-left: 4px solid var(--success);
             padding: 12px;
             border-radius: 0 var(--border-radius) var(--border-radius) 0;
         }
-
         .recommendation-title-mock {
             font-weight: 600;
             margin-bottom: 6px;
@@ -581,10 +318,10 @@
             gap: 6px;
         }
 
+        /* Общие секции */
         .section {
             padding: 60px 0 30px;
         }
-
         .section-title {
             font-size: 2.2rem;
             font-weight: 700;
@@ -592,7 +329,6 @@
             margin-bottom: 16px;
             color: var(--dark);
         }
-
         .section-subtitle {
             font-size: 1.125rem;
             color: var(--gray);
@@ -600,13 +336,11 @@
             max-width: 600px;
             margin: 0 auto 40px;
         }
-
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
         }
-
         .feature-card {
             background: var(--white);
             border-radius: var(--border-radius);
@@ -614,11 +348,9 @@
             box-shadow: var(--shadow);
             transition: transform 0.2s;
         }
-
         .feature-card:hover {
             transform: translateY(-5px);
         }
-
         .feature-icon {
             width: 64px;
             height: 64px;
@@ -631,13 +363,11 @@
             color: var(--primary);
             font-size: 28px;
         }
-
         .feature-card h3 {
             font-size: 1.25rem;
             font-weight: 600;
             margin-bottom: 12px;
         }
-
         .feature-card p {
             color: var(--gray);
             line-height: 1.6;
@@ -649,7 +379,6 @@
             gap: 24px;
             counter-reset: step;
         }
-
         .step {
             background: var(--white);
             border-radius: var(--border-radius);
@@ -658,7 +387,6 @@
             position: relative;
             text-align: center;
         }
-
         .step::before {
             counter-increment: step;
             content: counter(step);
@@ -677,13 +405,11 @@
             font-weight: 700;
             font-size: 18px;
         }
-
         .step h3 {
             font-size: 1.25rem;
             font-weight: 600;
             margin-bottom: 8px;
         }
-
         .step p {
             color: var(--gray);
             font-size: 0.95rem;
@@ -694,22 +420,18 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 24px;
         }
-
         .benefit {
             text-align: center;
         }
-
         .benefit i {
             font-size: 32px;
             color: var(--primary);
             margin-bottom: 16px;
         }
-
         .benefit h4 {
             font-weight: 600;
             margin-bottom: 8px;
         }
-
         .benefit p {
             color: var(--gray);
             font-size: 0.9rem;
@@ -722,20 +444,17 @@
             padding: 60px 20px;
             margin-top: 40px;
         }
-
         .cta-title {
             font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 16px;
         }
-
         .cta-text {
             font-size: 1.125rem;
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto 30px;
         }
-
         .btn-cta {
             background: white;
             color: var(--primary);
@@ -749,54 +468,46 @@
             display: inline-block;
             text-decoration: none;
         }
-
         .btn-cta:hover {
             background: rgba(255,255,255,0.9);
             transform: scale(1.05);
         }
 
-        /* Footer – 4 колонки (без баннера) */
+        /* Footer */
         footer {
             background: var(--dark);
             color: white;
             padding: 48px 0 24px;
         }
-
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1.5fr;
             gap: 40px;
             margin-bottom: 40px;
         }
-
         .footer-logo {
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 16px;
         }
-
         .footer-logo i {
             font-size: 32px;
             color: var(--white);
         }
-
         .footer-logo span {
             font-weight: 700;
             font-size: 24px;
             color: white;
         }
-
         .footer-col p {
             color: #94a3b8;
             margin-bottom: 20px;
         }
-
         .social {
             display: flex;
             gap: 16px;
         }
-
         .social a {
             color: #94a3b8;
             font-size: 22px;
@@ -806,35 +517,28 @@
             justify-content: center;
             text-decoration: none;
         }
-
         .social a:hover {
             color: white;
         }
-
         .footer-col h4 {
             font-weight: 600;
             margin-bottom: 20px;
             color: white;
         }
-
         .footer-links {
             list-style: none;
         }
-
         .footer-links li {
             margin-bottom: 12px;
         }
-
         .footer-links a {
             color: #94a3b8;
             text-decoration: none;
             transition: color 0.2s;
         }
-
         .footer-links a:hover {
             color: white;
         }
-
         .footer-bottom {
             border-top: 1px solid #2d3748;
             padding-top: 24px;
@@ -858,7 +562,6 @@
             z-index: 1000;
             display: none;
         }
-
         @media (min-width: 769px) {
             #cookie-banner {
                 left: 20px;
@@ -867,74 +570,229 @@
             }
         }
 
-        /* Планшеты */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-            .hero-content {
-                gap: 2rem;
-            }
-            .phone-mockup {
-                max-width: 400px;
-            }
+        /* ==================== СТИЛИ ДЛЯ РЕКЛАМНОГО БАННЕРА ==================== */
+        .offer-banner-wrapper {
+            padding: 20px 0 0;
+        }
+        .offer-banner {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            border: 1px solid #e9edf2;
+            transition: opacity 0.2s;
+            min-height: 70px;
+            cursor: pointer;
+        }
+        .offer-banner.hidden {
+            display: none;
+        }
+        .offer-banner-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            min-width: 0;
+            pointer-events: none;
+        }
+        .offer-banner-icon {
+            font-size: 28px;
+            color: var(--primary);
+            flex-shrink: 0;
+            pointer-events: none;
+        }
+        .offer-banner-text {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            pointer-events: none;
+        }
+        .offer-banner-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1f2937;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .offer-banner-desc {
+            font-size: 0.8rem;
+            color: #6b7280;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .offer-banner-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+            pointer-events: none;
+        }
+        .offer-banner-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 6px 16px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: background 0.2s;
+            white-space: nowrap;
+            pointer-events: auto;
+        }
+        .offer-banner-btn:hover {
+            background: var(--secondary);
+        }
+        .offer-banner-dots {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 2px 6px;
+            line-height: 1;
+            transition: color 0.2s;
+            pointer-events: auto;
+        }
+        .offer-banner-dots:hover {
+            color: #1f2937;
         }
 
-        /* Мобильные устройства */
+        .offer-banner-modal {
+            position: relative;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .offer-banner-modal.active {
+            display: flex;
+        }
+        .offer-banner-modal-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+            min-width: 0;
+            gap: 1px;
+            text-align: left;
+        }
+        .offer-banner-modal .modal-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px 10px;
+            font-size: 10px;
+            color: #1f2937;
+        }
+        .offer-banner-modal .modal-links span {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .offer-banner-modal .modal-links span:hover {
+            color: var(--primary);
+        }
+        .offer-banner-modal .modal-links a {
+            text-decoration: none;
+            color: #1f2937;
+            transition: color 0.2s;
+        }
+        .offer-banner-modal .modal-links a:hover {
+            color: var(--primary);
+        }
+        .offer-banner-modal .modal-links .modal-label {
+            color: #6b7280;
+            cursor: default;
+            font-weight: 500;
+        }
+        .offer-banner-modal .modal-links .modal-label:hover {
+            color: #6b7280;
+        }
+        .offer-banner-modal .modal-footer {
+            font-size: 9px;
+            color: #6b7280;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .offer-banner-modal .modal-close {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 2px 6px;
+            line-height: 1;
+            transition: color 0.2s;
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+        .offer-banner-modal .modal-close:hover {
+            color: #1f2937;
+        }
+
+        .offer-banner.modal-open .offer-banner-left,
+        .offer-banner.modal-open .offer-banner-right {
+            display: none;
+        }
+        .offer-banner.modal-open .offer-banner-modal {
+            display: flex;
+        }
+
         @media (max-width: 768px) {
-            .top-bar {
-                padding: 0 16px;
-                height: 40px;
+            .offer-banner {
+                flex-wrap: wrap;
+                padding: 12px;
+                min-height: auto;
             }
-            .top-bar-left img {
-                height: 20px;
-                max-width: 60px;
+            .offer-banner-left {
+                flex: 1 1 100%;
+                gap: 8px;
             }
-            .top-bar-text {
-                font-size: 10px;
+            .offer-banner-icon {
+                font-size: 22px;
             }
-            .top-bar-dots {
+            .offer-banner-title {
+                font-size: 0.85rem;
+            }
+            .offer-banner-desc {
+                font-size: 0.7rem;
+            }
+            .offer-banner-right {
+                width: 100%;
+                justify-content: flex-end;
+                margin-top: 4px;
+            }
+            .offer-banner-btn {
+                font-size: 0.75rem;
+                padding: 5px 14px;
+            }
+            .offer-banner-dots {
                 font-size: 16px;
-                padding: 2px 4px;
             }
-            .top-bar-label {
-                font-size: 9px;
-                padding: 1px 4px;
-            }
-            .top-bar-modal {
-                padding: 0;
-            }
-            .modal-links {
+            .offer-banner-modal .modal-links {
                 font-size: 9px;
                 gap: 2px 6px;
             }
-            .modal-footer {
+            .offer-banner-modal .modal-footer {
                 font-size: 8px;
             }
-            .modal-close {
-                font-size: 16px;
-                padding: 2px 4px;
-            }
-
-            .fixed-header {
-                padding: 8px 16px;
-            }
-            .header-logo {
-                font-size: 20px;
-                gap: 6px;
-                white-space: nowrap;
-            }
-            .header-logo i {
-                font-size: 24px;
-            }
-            .header-btn {
-                padding: 8px 20px;
-                font-size: 14px;
+        }
+        @media (max-width: 768px) {
+            .offer-banner-wrapper {
+                padding: 12px 0 0;
             }
             .hero-content {
                 grid-template-columns: 1fr;
                 text-align: center;
-                padding-top: calc(70px + var(--top-bar-height));
+                padding-top: 80px;
             }
             .hero-text h1 {
                 font-size: 2rem;
@@ -950,9 +808,6 @@
             .phone-mockup:hover {
                 transform: scale(1.05);
             }
-            .phone-screen {
-                height: 520px;
-            }
             .features-grid {
                 grid-template-columns: 1fr;
             }
@@ -967,15 +822,23 @@
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
-            .features-grid[style*="repeat(3,1fr)"] {
-                grid-template-columns: 1fr !important;
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            .hero-content {
+                gap: 2rem;
+            }
+            .phone-mockup {
+                max-width: 400px;
             }
         }
 
         .fade-in {
             animation: fadeIn 1s ease-in-out;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -983,41 +846,6 @@
     </style>
 </head>
 <body>
-
-    <!-- === Светлый баннер === -->
-    <div class="top-bar" id="topBar">
-        <div class="top-bar-content">
-            <!-- Основной контент (виден по умолчанию) -->
-            <div class="top-bar-main">
-                <a href="https://redirect.appmetrica.yandex.com/serve/246095005385529556?partner_id=831050&appmetrica_js_redirect=0&clid=15177770&banerid=1315177771&full=0" target="_blank" rel="noopener noreferrer" class="top-bar-left">
-                    <img src="300x250.png" alt="Яндекс Браузер">
-                    <span class="top-bar-text">
-                        <span class="highlight">Яндекс Браузер</span> с Алисой — перевод видео, защита паролей и кэшбэк до 30%
-                    </span>
-                </a>
-                <div class="top-bar-right">
-                    <span class="top-bar-label">Реклама</span>
-                    <button class="top-bar-dots" id="dotsMenuBtn" aria-label="Меню рекламы">⋮</button>
-                </div>
-            </div>
-
-            <!-- Модальное окно (поверх баннера) -->
-            <div class="top-bar-modal" id="modalMenu">
-                <div class="top-bar-modal-content">
-                    <div class="modal-links">
-                        <span class="modal-label">Реклама</span>
-                        <span id="hideAdBtn">Скрыть</span>
-                        <a href="https://yandex.ru/company/contacts/moscow" target="_blank">О рекламодателе</a>
-                        <a href="https://yandex.ru/support/browser-b2c-distr/ru/" target="_blank">О рекламе</a>
-                    </div>
-                    <div class="modal-footer">
-                        ООО «Яндекс», ИНН: 7736207543, erid: 5jtCeReNx12oajzf1gm8YtP
-                    </div>
-                </div>
-                <button class="modal-close" id="modalCloseBtn" aria-label="Закрыть меню">&times;</button>
-            </div>
-        </div>
-    </div>
 
     <!-- Фиксированный хедер -->
     <header class="fixed-header" id="fixedHeader">
@@ -1094,6 +922,37 @@
             </div>
         </div>
     </section>
+
+    <!-- ===== РЕКЛАМНЫЙ БАННЕР (ПОД HERO, ПЕРЕД "ДЛЯ КОГО") ===== -->
+    <div class="container offer-banner-wrapper" id="offerBannerWrapper">
+        <div class="offer-banner" id="offerBanner">
+            <!-- Основное содержимое баннера -->
+            <div class="offer-banner-left">
+                <span class="offer-banner-icon" id="offerIcon"></span>
+                <div class="offer-banner-text">
+                    <div class="offer-banner-title" id="offerTitle">Кредитные карты с льготным периодом</div>
+                    <div class="offer-banner-desc" id="offerDesc">До 180 дней без %, обслуживание от 0 ₽</div>
+                </div>
+            </div>
+            <div class="offer-banner-right">
+                <a href="#" id="offerLink" target="_blank" rel="noopener" class="offer-banner-btn">Оформить</a>
+                <button class="offer-banner-dots" id="offerDotsBtn" aria-label="Меню предложения">⋮</button>
+            </div>
+
+            <!-- Модальное окно (меню) -->
+            <div class="offer-banner-modal" id="offerModal">
+                <div class="offer-banner-modal-content">
+                    <div class="modal-links">
+                        <span class="modal-label">Реклама</span>
+                        <span id="hideOfferBtn">Скрыть</span>
+                        <a href="#" id="offerAboutLink" target="_blank">О партнере</a>
+                    </div>
+                    <div class="modal-footer" id="offerErid">ООО «Страховые партнеры», ИНН 9729069737, КПП 772501001, ОГРН 1177746324623</div>
+                </div>
+                <button class="modal-close" id="offerModalClose">&times;</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Блок "Для кого" -->
     <div class="container">
@@ -1238,7 +1097,7 @@
                                 <path d="M22.9937 12.437C18.6049 12.4962 16.1267 12.8097 14.4682 14.4682C12.8097 16.1267 12.4962 18.6049 12.437 22.9937C18.1658 22.7699 22.7699 18.1658 22.9937 12.437Z"></path>
                                 <path d="M11.7747 22.9999C11.7156 18.6072 11.4026 16.1274 9.74335 14.4682C8.05839 12.7832 5.52731 12.4865 1.00621 12.4343C1.23138 18.2348 5.94709 22.8829 11.7747 22.9999Z"></path>
                             </svg>
-                        </a>                        
+                        </a>
                         <a href="mailto:support@cashiq.ru"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
@@ -1272,46 +1131,157 @@
         </div>
     </footer>
 
+    <!-- Cookie-уведомление -->
+    <div id="cookie-banner">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+            <p style="margin: 0; font-size: 14px;">Продолжая пользоваться сайтом, вы соглашаетесь с <a href="cookie-policy.html?embed=1" target="_blank">Политикой использования cookie</a>.</p>
+            <button id="cookie-accept" style="background: var(--primary); color: white; border: none; border-radius: 30px; padding: 8px 20px; font-weight: 600; cursor: pointer;">Понятно</button>
+        </div>
+    </div>
+
     <script>
+        // ==================== ДАННЫЕ ОФФЕРОВ (ЧЕТЫРЕ ТИПА) ====================
+        const partnerOffers = [
+            {
+                icon: 'fa-hand-holding-usd',
+                title: 'Займы онлайн от 0%',
+                desc: 'До 100 000 ₽ на карту, высокое одобрение',
+                link: 'https://ppdu.ru/af1f8062-e56b-4fe6-9c97-23a551a2b134'
+            },
+            {
+                icon: 'fa-percent',
+                title: 'Карты с кэшбэком до 100%',
+                desc: 'Обслуживание от 0 ₽, бесплатные переводы',
+                link: 'https://ppdu.ru/a84327fc-c131-40f6-a2be-ef13f1183c18'
+            },
+            {
+                icon: 'fa-credit-card',
+                title: 'Кредитные карты с льготным периодом',
+                desc: 'До 180 дней без %, обслуживание от 0 ₽',
+                link: 'https://ppdu.ru/04d7d71a-2829-4e75-b2e5-cec231444432'
+            },
+            {
+                icon: 'fa-coins',
+                title: 'Вклады под высокий процент',
+                desc: 'Зафиксируйте ставку, страхование АСВ, срок от 1 месяца',
+                link: 'https://ppdu.ru/8376bc51-60da-4796-9462-626c764efe12'
+            }
+        ];
+
+        // Общие данные для модального окна (рекламодатель — платформа Pampadu)
+        const COMPANY_ABOUT_LINK = 'https://pampadu.ru';
+        const COMPANY_ERID = 'ООО "Страховые партнеры", ИНН 9729069737, КПП 772501001, ОГРН 1177746324623';
+
+        // ==================== УПРАВЛЕНИЕ БАННЕРОМ ====================
+        const banner = document.getElementById('offerBanner');
+        const iconEl = document.getElementById('offerIcon');
+        const titleEl = document.getElementById('offerTitle');
+        const descEl = document.getElementById('offerDesc');
+        const linkEl = document.getElementById('offerLink');
+        const aboutLinkEl = document.getElementById('offerAboutLink');
+        const eridEl = document.getElementById('offerErid');
+        const dotsBtn = document.getElementById('offerDotsBtn');
+        const modal = document.getElementById('offerModal');
+        const modalClose = document.getElementById('offerModalClose');
+        const hideBtn = document.getElementById('hideOfferBtn');
+        const wrapper = document.getElementById('offerBannerWrapper');
+
+        // Устанавливаем статические данные модалки (один раз)
+        aboutLinkEl.href = COMPANY_ABOUT_LINK;
+        eridEl.textContent = COMPANY_ERID;
+
+        let currentOffer = null;
+        let intervalId = null;
+        let lastIndex = -1;
+
+        function getRandomOffer() {
+            let idx;
+            do {
+                idx = Math.floor(Math.random() * partnerOffers.length);
+            } while (idx === lastIndex && partnerOffers.length > 1);
+            lastIndex = idx;
+            return partnerOffers[idx];
+        }
+
+        function setOffer(offer) {
+            currentOffer = offer;
+            iconEl.className = 'offer-banner-icon fas ' + offer.icon;
+            titleEl.textContent = offer.title;
+            descEl.textContent = offer.desc;
+            linkEl.href = offer.link;
+        }
+
+        function rotateOffer() {
+            const newOffer = getRandomOffer();
+            setOffer(newOffer);
+        }
+
+        function startRotation() {
+            if (intervalId) clearInterval(intervalId);
+            intervalId = setInterval(rotateOffer, 10000);
+        }
+
+        function stopRotation() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+            }
+        }
+
+        // ==================== УПРАВЛЕНИЕ МОДАЛЬНЫМ ОКНОМ ====================
+        dotsBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            banner.classList.toggle('modal-open');
+        });
+
+        modalClose.addEventListener('click', function() {
+            banner.classList.remove('modal-open');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (banner.classList.contains('modal-open')) {
+                const isInside = banner.contains(e.target);
+                if (!isInside) {
+                    banner.classList.remove('modal-open');
+                }
+            }
+        });
+
+        hideBtn.addEventListener('click', function() {
+            wrapper.style.display = 'none';
+            localStorage.setItem('offerBannerHidden', 'true');
+            banner.classList.remove('modal-open');
+            stopRotation();
+        });
+
+        // ==================== КЛИК ПО БАННЕРУ ====================
+        banner.addEventListener('click', function(e) {
+            if (e.target.closest('.offer-banner-dots') || e.target.closest('.offer-banner-modal')) {
+                return;
+            }
+            if (currentOffer && currentOffer.link) {
+                window.open(currentOffer.link, '_blank');
+            }
+        });
+
+        // ==================== ИНИЦИАЛИЗАЦИЯ ====================
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Управление модальным окном ---
-            const topBar = document.getElementById('topBar');
-            const dotsBtn = document.getElementById('dotsMenuBtn');
-            const modalClose = document.getElementById('modalCloseBtn');
-            const hideAdBtn = document.getElementById('hideAdBtn');
-            const fixedHeader = document.getElementById('fixedHeader');
-            const heroContent = document.getElementById('heroContent');
-
-            // Открыть модалку
-            dotsBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                topBar.classList.toggle('modal-open');
-            });
-
-            // Закрыть модалку по крестику
-            modalClose.addEventListener('click', function() {
-                topBar.classList.remove('modal-open');
-            });
-
-            // Обработка пункта "Скрыть" – закрыть баннер полностью
-            hideAdBtn.addEventListener('click', function() {
-                topBar.classList.add('hidden');
-                document.body.classList.add('top-bar-hidden');
-                fixedHeader.style.top = '0px';
-                heroContent.style.paddingTop = '100px';
-                localStorage.setItem('topBarClosed', 'true');
-                topBar.classList.remove('modal-open');
-            });
-
-            // Проверка localStorage при загрузке
-            if (localStorage.getItem('topBarClosed') === 'true') {
-                topBar.classList.add('hidden');
-                document.body.classList.add('top-bar-hidden');
-                fixedHeader.style.top = '0px';
-                heroContent.style.paddingTop = '100px';
+            if (localStorage.getItem('offerBannerHidden') === 'true') {
+                wrapper.style.display = 'none';
+                return;
             }
 
-            // --- Остальные скрипты (анимации, скролл) ---
+            const firstOffer = getRandomOffer();
+            setOffer(firstOffer);
+            startRotation();
+
+            // Остальные скрипты (анимации, якоря, cookie)
+            initOtherScripts();
+        });
+
+        // ==================== ОСТАЛЬНЫЕ СКРИПТЫ ====================
+        function initOtherScripts() {
+            // Анимации появления секций
             const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
             const observer = new IntersectionObserver(function(entries) {
                 entries.forEach(entry => {
@@ -1323,6 +1293,8 @@
             document.querySelectorAll('section').forEach(section => {
                 observer.observe(section);
             });
+
+            // Плавная прокрутка по якорям
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -1332,8 +1304,10 @@
                     }
                 });
             });
+
+            // Прозрачность хедера при скролле
+            const header = document.querySelector('.fixed-header');
             window.addEventListener('scroll', function() {
-                const header = document.querySelector('.fixed-header');
                 if (window.scrollY > 100) {
                     header.style.background = 'rgba(255, 255, 255, 0.95)';
                     header.style.backdropFilter = 'blur(10px)';
@@ -1342,19 +1316,8 @@
                     header.style.backdropFilter = 'none';
                 }
             });
-        });
-    </script>    
 
-    <!-- Cookie-уведомление -->
-    <div id="cookie-banner">
-        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-            <p style="margin: 0; font-size: 14px;">Продолжая пользоваться сайтом, вы соглашаетесь с <a href="cookie-policy.html?embed=1" target="_blank">Политикой использования cookie</a>.</p>
-            <button id="cookie-accept" style="background: var(--primary); color: white; border: none; border-radius: 30px; padding: 8px 20px; font-weight: 600; cursor: pointer;">Понятно</button>
-        </div>
-    </div>
-
-    <script>
-        (function() {
+            // Cookie
             if (!localStorage.getItem('cookieAccepted')) {
                 document.getElementById('cookie-banner').style.display = 'block';
             }
@@ -1362,11 +1325,13 @@
                 localStorage.setItem('cookieAccepted', 'true');
                 document.getElementById('cookie-banner').style.display = 'none';
             });
-        })();
-        document.querySelector('.btn-secondary').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
-        });
+
+            // Кнопка "Узнать больше" в hero
+            document.querySelector('.btn-secondary').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
     </script>
 </body>
 </html>
